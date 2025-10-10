@@ -3,9 +3,10 @@ from .test_recipe_base import RecipeTestBase, Recipe
 from parameterized import parameterized
 
 
-class RecipeModelTest(RecipeTestBase):
+class RecipesModelsTests(RecipeTestBase):
     def setUp(self) -> None:
         self.recipe = self.make_recipe()
+        self.categy = self.make_category()
         return super().setUp()
 
     def make_recipe_no_default(self):
@@ -14,7 +15,7 @@ class RecipeModelTest(RecipeTestBase):
             author=self.make_author(username='Jouse'),
             title='Recipe title',
             description='Recipe description',
-            slug='recipe-slug',
+            slug='recipe-slug-default',
             preparation_time=10,
             preparation_time_unit='Minutos',
             servings=5,
@@ -52,3 +53,20 @@ class RecipeModelTest(RecipeTestBase):
             recipe.is_published,
             msg='is_published is not False'
         )
+
+    def test_recipe_str_title_represetation(self):
+        self.recipe.title = 'Testing represetation'
+        self.recipe.full_clean()
+        self.recipe.save()
+        self.assertEqual(str(self.recipe), 'Testing represetation')
+
+    def test_recipe_str_category_represetation(self):
+        self.categy.name = 'Testing represetation category'
+        self.categy.full_clean()
+        self.categy.save()
+        self.assertEqual(str(self.categy), 'Testing represetation category')
+
+    def test_recipe_category_model_name_max_lenght_is_65_chars(self):
+        self.categy.name = "a" * 66
+        with self.assertRaises(ValidationError):
+            self.categy.full_clean()
