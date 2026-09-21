@@ -24,7 +24,7 @@ class RecipeSearchViewTest(RecipeTestBase):
         url = reverse('recipes:search') + '?q=Teste'
         response = self.client.get(url)
         self.assertIn(
-            'Search for &quot;Teste&quot;',
+            'Busca por &quot;Teste&quot;',
             response.content.decode('utf-8')
         )
 

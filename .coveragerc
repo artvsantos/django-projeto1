@@ -1,3 +1,14 @@
 [run]
 branch = True
-omit = venv/*, **/*test*.py, manage.py, __localcode/*, utils/recipes/*
+omit =
+    venv/*
+    manage.py
+    __localcode/*
+    **/*test*.py
+    **/tests/*
+    **/migrations/*
+    **/management/**
+    projeto/settings.py
+    projeto/wsgi.py
+    projeto/asgi.py
+    utils/recipes/*

@@ -129,3 +129,5 @@ db.sqlite3
 db copy.sqlite3
 static/
 comandos.txt
+# pasta que o app do Claude cria ao entregar arquivos aqui
+Claude outputs/

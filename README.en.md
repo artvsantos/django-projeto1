@@ -4,13 +4,12 @@ A recipe site built with Django. It's a study project, written test-first.
 
 [![CI](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml/badge.svg)](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml)
 [![Django](https://img.shields.io/badge/django-5.2-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com)
-[![Coverage](https://img.shields.io/badge/coverage-99%25-2EA043?style=flat-square)](#tests)
+[![Coverage](https://img.shields.io/badge/coverage-98%25-2EA043?style=flat-square)](#tests)
 [![MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 [Versão em português](README.md)
 
-<!-- take a screenshot of the home page, save it as docs/home.png and uncomment the line below -->
-<!-- ![Home](docs/home.png) -->
+![Recipes home page: header with category menu, search, and the recipe list as cards](docs/home.png)
 
 ## What it does
 
@@ -24,9 +23,13 @@ Pagination isn't Django's out of the box. There's a function in `utils/paginatio
 
 ## Tests
 
-37 tests, 99% coverage.
+37 tests, 98% coverage.
 
-They cover the models, the URLs, all four views and the pagination range. I use `parameterized` to check several fields without writing the same test five times over, and `Faker` builds the test recipes through a factory in `utils/recipes/factory.py`.
+They cover the models, the URLs, all four views and the pagination range. Models, views and URLs sit at 100%; pagination is at 93%, and that's where the edge cases live.
+
+Settings, migrations and the seed command are excluded from the measurement. They aren't application code, and counting them would only pad the number.
+
+I use `parameterized` to check several fields without writing the same test five times over, and `Faker` builds the test recipes through a factory in `utils/recipes/factory.py`.
 
 ```bash
 pytest

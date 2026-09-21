@@ -2,8 +2,7 @@
     {% if recipe.cover %}
         <div class="recipe-cover">
             <a href="{% url "recipes:recipe" recipe.id %}">
-                <img src="https://placehold.co/1280x720.png" alt="Temporário">
-                {% comment %} <img src="{{ recipe.cover.url }}" alt=""> {% endcomment %}
+                <img src="{{ recipe.cover.url }}" alt="{{ recipe.title }}">
             </a>
         </div>
     {% endif %}

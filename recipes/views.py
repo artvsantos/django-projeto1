@@ -48,7 +48,7 @@ def category(request, category_id):
     return render(request, 'recipes/pages/category.html', context={
         'recipes': page_obj,
         'pagination_range': pagination_range,
-        'title': f'{recipes[0].category.name} - Category'  # type: ignore
+        'title': f'Categoria: {recipes[0].category.name}'  # type: ignore
     })
 
 
@@ -69,7 +69,7 @@ def search(request):
     page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
 
     return render(request, 'recipes/pages/search.html', {
-        'page_title': f'Search for "{search_term}" |',
+        'page_title': f'Busca por "{search_term}"',
         'search_term': search_term,
         'recipes': page_obj,
         'pagination_range': pagination_range,

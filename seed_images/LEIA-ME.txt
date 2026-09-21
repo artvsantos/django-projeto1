@@ -1,0 +1,18 @@
+Coloque aqui 4 fotos com EXATAMENTE estes nomes:
+
+  bolo-de-cenoura-com-calda-de-chocolate.jpg
+  strogonoff-de-frango.jpg
+  feijoada-de-panela-de-pressao.jpg
+  pao-de-queijo-mineiro.jpg
+
+Pode ser .jpg, .jpeg, .png ou .webp.
+
+Onde baixar de graca e com licenca livre:
+  https://unsplash.com/s/photos/carrot-cake
+  https://unsplash.com/s/photos/beef-stroganoff
+  https://www.pexels.com/search/feijoada/
+  https://www.pexels.com/search/cheese%20bread/
+
+Depois rode:  python manage.py seed_recipes
+
+Receita sem foto correspondente e criada sem capa, o site nao quebra.

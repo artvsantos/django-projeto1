@@ -4,13 +4,12 @@ Site de receitas feito em Django. É um projeto de estudo, escrito com TDD: os t
 
 [![CI](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml/badge.svg)](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml)
 [![Django](https://img.shields.io/badge/django-5.2-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com)
-[![Cobertura](https://img.shields.io/badge/cobertura-99%25-2EA043?style=flat-square)](#testes)
+[![Cobertura](https://img.shields.io/badge/cobertura-98%25-2EA043?style=flat-square)](#testes)
 [![MIT](https://img.shields.io/badge/licença-MIT-blue?style=flat-square)](LICENSE)
 
 [English version](README.en.md)
 
-<!-- tire um print da home, salve como docs/home.png e descomente a linha abaixo -->
-<!-- ![Home](docs/home.png) -->
+![Home do Recipes: cabeçalho com menu de categorias, busca e a lista de receitas em cards](docs/home.png)
 
 ## O que ele faz
 
@@ -24,9 +23,13 @@ A paginação não é a do Django pura. Tem uma função em `utils/pagination.py
 
 ## Testes
 
-37 testes, 99% de cobertura.
+37 testes, 98% de cobertura.
 
-Cobrem os models, as URLs, as quatro views e o cálculo da paginação. Uso `parameterized` para checar vários campos sem escrever o mesmo teste cinco vezes, e o `Faker` monta as receitas de teste através de uma factory em `utils/recipes/factory.py`.
+Cobrem os models, as URLs, as quatro views e o cálculo da paginação. Models, views e URLs estão em 100%; a paginação fica em 93%, e é onde moram os casos de borda.
+
+A medição exclui settings, migrations e o comando de seed. Não é código de aplicação, e contar esses arquivos só inflaria o número.
+
+Uso `parameterized` para checar vários campos sem escrever o mesmo teste cinco vezes, e o `Faker` monta as receitas de teste através de uma factory em `utils/recipes/factory.py`.
 
 ```bash
 pytest

@@ -20,7 +20,7 @@ class RecipeHomeViewTest(RecipeTestBase):
     def test_recipe_home_shows_msg_if_no_recipes_found(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
-            'No recipes found here 🙁',
+            'Nenhuma receita publicada ainda 🙁',
             response.content.decode('utf-8')
         )
 
@@ -40,7 +40,7 @@ class RecipeHomeViewTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:home'))
 
         self.assertIn(
-            'No recipes found here 🙁',
+            'Nenhuma receita publicada ainda 🙁',
             response.content.decode('utf-8')
         )
 
