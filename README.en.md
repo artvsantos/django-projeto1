@@ -9,7 +9,7 @@ A recipe site built with Django. It's a study project, written test-first.
 
 [Versão em português](README.md)
 
-![Recipes home page: header with category menu, search, and the recipe list as cards](docs/home.png)
+![Recipes home page: header with log in and sign up links, category menu, search, and the recipe list as cards](docs/home.png)
 
 ## What it does
 

@@ -9,7 +9,7 @@ Site de receitas feito em Django. É um projeto de estudo, escrito com TDD: os t
 
 [English version](README.en.md)
 
-![Home do Recipes: cabeçalho com menu de categorias, busca e a lista de receitas em cards](docs/home.png)
+![Home do Recipes: cabeçalho com links para entrar e criar conta, menu de categorias, busca e a lista de receitas em cards](docs/home.png)
 
 ## O que ele faz
 
