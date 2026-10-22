@@ -131,3 +131,6 @@ static/
 comandos.txt
 # pasta que o app do Claude cria ao entregar arquivos aqui
 Claude outputs/
+
+# contexto para o Claude Code (local, nao publicar)
+CLAUDE.md
