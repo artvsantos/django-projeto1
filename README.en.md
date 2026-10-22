@@ -18,14 +18,15 @@ A recipe site built with Django. It's a study project, written test-first.
 - Recipes filtered by category
 - A page for each recipe
 - Django admin for adding recipes and categories, with cover image upload
+- Author sign-up, with strong password checks and unique e-mail
 
 Pagination isn't Django's out of the box. There's a function in `utils/pagination.py` that builds the range of page numbers around the current page without running past either end of the list. It has the most edge cases in the project, and the most tests.
 
 ## Tests
 
-37 tests, 98% coverage.
+64 tests, 98% coverage.
 
-They cover the models, the URLs, all four views and the pagination range. Models, views and URLs sit at 100%; pagination is at 93%, and that's where the edge cases live.
+They cover the models, the URLs, the views, the sign-up form and the pagination range. Models, views and URLs sit at 100%; pagination is at 93%, and that's where the edge cases live.
 
 Settings, migrations and the seed command are excluded from the measurement. They aren't application code, and counting them would only pad the number.
 
@@ -76,6 +77,9 @@ recipes/          main app
   views.py        home, search, category, recipe
   tests/          the test suite
   templates/      pages and partials
+authors/          author sign-up
+  forms.py        RegisterForm and its validation
+  views.py        register
 utils/
   pagination.py   page range calculation
   recipes/        factory for fake recipes

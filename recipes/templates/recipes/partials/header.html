@@ -8,6 +8,16 @@
             </a>
         </h1>
 
+        <div class="main-header-account">
+            {% if user.is_authenticated %}
+                <span>Olá, {{ user.first_name|default:user.username }}</span>
+            {% else %}
+                <a class="main-header-account-link" href="{% url "authors:register" %}">
+                    <i class="fas fa-user-plus"></i> Criar conta
+                </a>
+            {% endif %}
+        </div>
+
         {% if menu_categories %}
             <nav class="main-nav">
                 <a class="main-nav-item" href="{% url "recipes:home" %}">Todas as receitas</a>

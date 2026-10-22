@@ -18,14 +18,15 @@ Site de receitas feito em Django. É um projeto de estudo, escrito com TDD: os t
 - Listagem por categoria
 - Página de cada receita
 - Admin do Django para cadastrar receita e categoria, com upload de capa
+- Cadastro de autor, com validação de senha forte e e-mail único
 
 A paginação não é a do Django pura. Tem uma função em `utils/pagination.py` que monta o intervalo de páginas em volta da página atual sem passar do começo nem do fim da lista. É a parte com mais caso de borda do projeto, e também a mais testada.
 
 ## Testes
 
-37 testes, 98% de cobertura.
+64 testes, 98% de cobertura.
 
-Cobrem os models, as URLs, as quatro views e o cálculo da paginação. Models, views e URLs estão em 100%; a paginação fica em 93%, e é onde moram os casos de borda.
+Cobrem os models, as URLs, as views, o formulário de cadastro e o cálculo da paginação. Models, views e URLs estão em 100%; a paginação fica em 93%, e é onde moram os casos de borda.
 
 A medição exclui settings, migrations e o comando de seed. Não é código de aplicação, e contar esses arquivos só inflaria o número.
 
@@ -76,6 +77,9 @@ recipes/          app principal
   views.py        home, search, category, recipe
   tests/          os testes
   templates/      páginas e partials
+authors/          cadastro de autor
+  forms.py        RegisterForm e suas validações
+  views.py        register
 utils/
   pagination.py   cálculo do intervalo de páginas
   recipes/        factory de receitas falsas

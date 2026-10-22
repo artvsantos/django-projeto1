@@ -100,6 +100,14 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.2; }
     color: var(--cor-clara);
 }
 
+.main-header-account {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, .75);
+}
+
+.main-header-account-link { transition: color .2s; }
+.main-header-account-link:hover { color: var(--cor-primaria); }
+
 /* ===== Busca ===== */
 
 .search-container {
@@ -306,6 +314,77 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.2; }
 
 .page-current:hover { background: var(--cor-primaria-escura); }
 
+/* ===== Mensagens ===== */
+
+.messages { margin-bottom: calc(var(--espaco) * 1.5); }
+
+.message {
+    max-width: 72rem;
+    margin: 0 auto .8rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: var(--raio);
+    border-left: 4px solid var(--cor-escura);
+    background: var(--cor-clara);
+    box-shadow: var(--sombra);
+}
+
+.message-success { border-left-color: #2e8b57; }
+.message-error { border-left-color: var(--cor-primaria); }
+
+/* ===== Formulários ===== */
+
+.form-page { max-width: 72rem; }
+
+.form-intro { margin-bottom: calc(var(--espaco) * 1.5); }
+.form-title { font-size: 2.8rem; }
+.form-subtitle { color: var(--cor-texto-suave); }
+
+.main-form {
+    background: var(--cor-clara);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: calc(var(--espaco) * 1.5);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--espaco);
+    margin-bottom: calc(var(--espaco) * 1.5);
+}
+
+.form-group { display: flex; flex-direction: column; gap: .4rem; }
+
+.form-group label { font-weight: 600; font-size: 1.4rem; }
+
+.form-group input {
+    padding: 1.1rem 1.4rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    font-size: 1.6rem;
+    font-family: inherit;
+    background: var(--cor-fundo);
+    transition: border-color .2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--cor-escura);
+    background: var(--cor-clara);
+}
+
+.form-group-error input { border-color: var(--cor-primaria); }
+
+.form-help { font-size: 1.3rem; color: var(--cor-texto-suave); }
+
+.form-error {
+    font-size: 1.3rem;
+    color: var(--cor-primaria-escura);
+    font-weight: 600;
+}
+
+.main-form button { border: none; cursor: pointer; font-size: 1.6rem; }
+
 /* ===== Rodapé ===== */
 
 .main-footer {
@@ -325,6 +404,7 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.2; }
 
 @media (max-width: 600px) {
     .main-content-list { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
     .page-intro-title { font-size: 2.4rem; }
     .recipe-meta-container { flex-direction: column; }
     .recipe-meta + .recipe-meta {

@@ -1,0 +1,39 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Criar conta{% endblock title %}
+
+{% block content %}
+<div class="main-content container form-page">
+    <div class="form-intro">
+        <h2 class="form-title">Criar conta</h2>
+        <p class="form-subtitle">Cadastre-se para publicar suas próprias receitas.</p>
+    </div>
+
+    <form class="main-form" action="{% url 'authors:register' %}" method="POST" novalidate>
+        {% csrf_token %}
+
+        {% for error in form.non_field_errors %}
+            <p class="form-error">{{ error }}</p>
+        {% endfor %}
+
+        <div class="form-grid">
+            {% for field in form %}
+                <div class="form-group{% if field.errors %} form-group-error{% endif %}">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <p class="form-help">{{ field.help_text }}</p>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="button button-dark button-full-width">Criar conta</button>
+    </form>
+</div>
+{% endblock content %}
