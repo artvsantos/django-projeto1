@@ -149,6 +149,9 @@ STORAGES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Para onde o @login_required manda quem não entrou.
+LOGIN_URL = 'authors:login'
+
 # Só na hospedagem, que define PRODUCTION=1. Localmente e nos
 # testes fica desligado, senão o SSL redirect quebra o test client.
 if os.environ.get('PRODUCTION') == '1':

@@ -70,3 +70,28 @@ class RecipesModelsTests(RecipeTestBase):
         self.categy.name = "a" * 66
         with self.assertRaises(ValidationError):
             self.categy.full_clean()
+
+    def test_recipe_without_slug_gets_one_from_title(self):
+        recipe = self.make_recipe(slug='', title='Pão de queijo mineiro',
+                                  author_data={'username': 'outro'})
+
+        self.assertEqual(recipe.slug, 'pao-de-queijo-mineiro')
+
+    def test_recipe_generated_slug_does_not_repeat(self):
+        first = self.make_recipe(slug='', title='Pão de queijo',
+                                 author_data={'username': 'a'})
+        second = self.make_recipe(slug='', title='Pão de queijo',
+                                  author_data={'username': 'b'})
+        third = self.make_recipe(slug='', title='Pão de queijo',
+                                 author_data={'username': 'c'})
+
+        self.assertEqual(
+            [first.slug, second.slug, third.slug],
+            ['pao-de-queijo', 'pao-de-queijo-2', 'pao-de-queijo-3'],
+        )
+
+    def test_recipe_slug_is_not_changed_when_title_changes(self):
+        self.recipe.title = 'Outro título'
+        self.recipe.save()
+
+        self.assertEqual(self.recipe.slug, 'recipe-slug')

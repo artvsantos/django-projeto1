@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 # Create your models here.
 
 
@@ -36,3 +37,19 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        # Receita criada pelo painel do autor chega sem slug. Ele é gerado
+        # uma vez só: mudar o título depois não quebra links já divulgados.
+        if not self.slug:
+            self.slug = self._unique_slug()
+        return super().save(*args, **kwargs)
+
+    def _unique_slug(self):
+        # SlugField tem 50 caracteres; sobra espaço para o sufixo "-2", "-3".
+        base = slugify(self.title)[:45].strip('-') or 'receita'
+        slug, number = base, 2
+        while Recipe.objects.filter(slug=slug).exists():
+            slug = f'{base}-{number}'
+            number += 1
+        return slug

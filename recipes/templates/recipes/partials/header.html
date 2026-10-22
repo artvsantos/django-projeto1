@@ -11,6 +11,9 @@
         <div class="main-header-account">
             {% if user.is_authenticated %}
                 <span>Olá, {{ user.first_name|default:user.username }}</span>
+                <a class="main-header-account-link" href="{% url "authors:dashboard" %}">
+                    <i class="fas fa-clipboard-list"></i> Meu painel
+                </a>
                 <form class="main-header-logout" action="{% url "authors:logout" %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="main-header-account-link">

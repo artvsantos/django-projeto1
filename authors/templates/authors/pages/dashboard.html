@@ -1,0 +1,56 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Meu painel{% endblock title %}
+
+{% block content %}
+<div class="main-content container dashboard">
+    <div class="dashboard-header">
+        <div>
+            <h2 class="form-title">Minhas receitas</h2>
+            <p class="form-subtitle">Receitas novas ou editadas aparecem no site depois de aprovadas.</p>
+        </div>
+        <a class="button button-dark" href="{% url 'authors:recipe_create' %}">
+            <i class="fas fa-plus"></i> Nova receita
+        </a>
+    </div>
+
+    {% if recipes %}
+        <ul class="dashboard-list">
+            {% for recipe in recipes %}
+                <li class="dashboard-item">
+                    <div class="dashboard-item-info">
+                        {% if recipe.is_published %}
+                            <a class="dashboard-item-title" href="{% url 'recipes:recipe' recipe.id %}">{{ recipe.title }}</a>
+                            <span class="status status-published">Publicada</span>
+                        {% else %}
+                            <span class="dashboard-item-title">{{ recipe.title }}</span>
+                            <span class="status status-pending">Aguardando aprovação</span>
+                        {% endif %}
+                        {% if recipe.category %}
+                            <span class="dashboard-item-category">{{ recipe.category.name }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="dashboard-item-actions">
+                        <a class="dashboard-action" href="{% url 'authors:recipe_edit' recipe.id %}">
+                            <i class="fas fa-pen"></i> Editar
+                        </a>
+                        <form action="{% url 'authors:recipe_delete' recipe.id %}" method="POST"
+                              onsubmit="return confirm('Apagar a receita “{{ recipe.title|escapejs }}”? Não dá para desfazer.');">
+                            {% csrf_token %}
+                            <button type="submit" class="dashboard-action dashboard-action-danger">
+                                <i class="fas fa-trash"></i> Apagar
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="dashboard-empty">
+            <p>Você ainda não tem receitas.</p>
+            <a href="{% url 'authors:recipe_create' %}">Enviar a primeira</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}
