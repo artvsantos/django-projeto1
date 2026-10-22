@@ -4,7 +4,7 @@ A recipe site built with Django. It's a study project, written test-first.
 
 [![CI](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml/badge.svg)](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml)
 [![Django](https://img.shields.io/badge/django-5.2-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com)
-[![Coverage](https://img.shields.io/badge/coverage-98%25-2EA043?style=flat-square)](#tests)
+[![Coverage](https://img.shields.io/badge/coverage-99%25-2EA043?style=flat-square)](#tests)
 [![MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 [Versão em português](README.md)
@@ -19,14 +19,15 @@ A recipe site built with Django. It's a study project, written test-first.
 - A page for each recipe
 - Django admin for adding recipes and categories, with cover image upload
 - Author sign-up, with strong password checks and unique e-mail
+- Log in and log out, with protection against redirects to other sites
 
 Pagination isn't Django's out of the box. There's a function in `utils/pagination.py` that builds the range of page numbers around the current page without running past either end of the list. It has the most edge cases in the project, and the most tests.
 
 ## Tests
 
-64 tests, 98% coverage.
+85 tests, 99% coverage.
 
-They cover the models, the URLs, the views, the sign-up form and the pagination range. Models, views and URLs sit at 100%; pagination is at 93%, and that's where the edge cases live.
+They cover the models, the URLs, the views, the sign-up and login forms and the pagination range. Models, views and URLs sit at 100%; pagination is at 93%, and that's where the edge cases live.
 
 Settings, migrations and the seed command are excluded from the measurement. They aren't application code, and counting them would only pad the number.
 
@@ -77,9 +78,9 @@ recipes/          main app
   views.py        home, search, category, recipe
   tests/          the test suite
   templates/      pages and partials
-authors/          author sign-up
-  forms.py        RegisterForm and its validation
-  views.py        register
+authors/          sign-up, log in and log out
+  forms.py        RegisterForm and LoginForm
+  views.py        register, login, logout
 utils/
   pagination.py   page range calculation
   recipes/        factory for fake recipes

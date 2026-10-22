@@ -101,11 +101,26 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.2; }
 }
 
 .main-header-account {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
     font-size: 1.4rem;
     color: rgba(255, 255, 255, .75);
 }
 
-.main-header-account-link { transition: color .2s; }
+.main-header-logout { display: contents; }
+
+/* O botão de sair é um form (logout só por POST), mas tem que
+   parecer com os links ao lado. */
+.main-header-account-link {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: color .2s;
+}
+
 .main-header-account-link:hover { color: var(--cor-primaria); }
 
 /* ===== Busca ===== */
@@ -334,6 +349,7 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.2; }
 /* ===== Formulários ===== */
 
 .form-page { max-width: 72rem; }
+.form-page-narrow { max-width: 44rem; }
 
 .form-intro { margin-bottom: calc(var(--espaco) * 1.5); }
 .form-title { font-size: 2.8rem; }
@@ -352,6 +368,8 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.2; }
     gap: var(--espaco);
     margin-bottom: calc(var(--espaco) * 1.5);
 }
+
+.form-grid-single { grid-template-columns: 1fr; }
 
 .form-group { display: flex; flex-direction: column; gap: .4rem; }
 
@@ -383,7 +401,18 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.2; }
     font-weight: 600;
 }
 
+.form-error-general { margin-bottom: var(--espaco); }
+
 .main-form button { border: none; cursor: pointer; font-size: 1.6rem; }
+
+.form-switch {
+    margin-top: var(--espaco);
+    text-align: center;
+    color: var(--cor-texto-suave);
+}
+
+.form-switch a { color: var(--cor-primaria); font-weight: 600; }
+.form-switch a:hover { text-decoration: underline; }
 
 /* ===== Rodapé ===== */
 

@@ -35,7 +35,7 @@ class AuthorRegisterViewTest(TestCase):
         response = self.client.post(self.url, data=self.form_data)
         user = User.objects.get(username='mariasouza')
 
-        self.assertRedirects(response, reverse('recipes:home'))
+        self.assertRedirects(response, reverse('authors:login'))
         self.assertEqual(user.email, 'maria@email.com')
         self.assertTrue(user.check_password('Tempero#Forte2026'))
 

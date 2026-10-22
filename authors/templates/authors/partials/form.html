@@ -1,0 +1,26 @@
+<form class="main-form" action="{{ form_action }}" method="POST" novalidate>
+    {% csrf_token %}
+
+    {% for error in form.non_field_errors %}
+        <p class="form-error form-error-general">{{ error }}</p>
+    {% endfor %}
+
+    <div class="form-grid {{ form_grid_class }}">
+        {% for field in form %}
+            <div class="form-group{% if field.errors %} form-group-error{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+
+                {% if field.help_text %}
+                    <p class="form-help">{{ field.help_text }}</p>
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <p class="form-error">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="button button-dark button-full-width">{{ button_label }}</button>
+</form>

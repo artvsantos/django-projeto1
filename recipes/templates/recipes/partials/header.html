@@ -11,7 +11,16 @@
         <div class="main-header-account">
             {% if user.is_authenticated %}
                 <span>Olá, {{ user.first_name|default:user.username }}</span>
+                <form class="main-header-logout" action="{% url "authors:logout" %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="main-header-account-link">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </button>
+                </form>
             {% else %}
+                <a class="main-header-account-link" href="{% url "authors:login" %}">
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </a>
                 <a class="main-header-account-link" href="{% url "authors:register" %}">
                     <i class="fas fa-user-plus"></i> Criar conta
                 </a>

@@ -90,3 +90,14 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        label='Nome de usuário',
+        widget=forms.TextInput(attrs={'placeholder': 'Seu nome de usuário'}),
+    )
+    password = forms.CharField(
+        label='Senha',
+        widget=forms.PasswordInput(attrs={'placeholder': 'Sua senha'}),
+    )

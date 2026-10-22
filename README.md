@@ -4,7 +4,7 @@ Site de receitas feito em Django. É um projeto de estudo, escrito com TDD: os t
 
 [![CI](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml/badge.svg)](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml)
 [![Django](https://img.shields.io/badge/django-5.2-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com)
-[![Cobertura](https://img.shields.io/badge/cobertura-98%25-2EA043?style=flat-square)](#testes)
+[![Cobertura](https://img.shields.io/badge/cobertura-99%25-2EA043?style=flat-square)](#testes)
 [![MIT](https://img.shields.io/badge/licença-MIT-blue?style=flat-square)](LICENSE)
 
 [English version](README.en.md)
@@ -19,14 +19,15 @@ Site de receitas feito em Django. É um projeto de estudo, escrito com TDD: os t
 - Página de cada receita
 - Admin do Django para cadastrar receita e categoria, com upload de capa
 - Cadastro de autor, com validação de senha forte e e-mail único
+- Login e logout, com proteção contra redirecionamento para outro site
 
 A paginação não é a do Django pura. Tem uma função em `utils/pagination.py` que monta o intervalo de páginas em volta da página atual sem passar do começo nem do fim da lista. É a parte com mais caso de borda do projeto, e também a mais testada.
 
 ## Testes
 
-64 testes, 98% de cobertura.
+85 testes, 99% de cobertura.
 
-Cobrem os models, as URLs, as views, o formulário de cadastro e o cálculo da paginação. Models, views e URLs estão em 100%; a paginação fica em 93%, e é onde moram os casos de borda.
+Cobrem os models, as URLs, as views, os formulários de cadastro e login e o cálculo da paginação. Models, views e URLs estão em 100%; a paginação fica em 93%, e é onde moram os casos de borda.
 
 A medição exclui settings, migrations e o comando de seed. Não é código de aplicação, e contar esses arquivos só inflaria o número.
 
@@ -77,9 +78,9 @@ recipes/          app principal
   views.py        home, search, category, recipe
   tests/          os testes
   templates/      páginas e partials
-authors/          cadastro de autor
-  forms.py        RegisterForm e suas validações
-  views.py        register
+authors/          cadastro, login e logout
+  forms.py        RegisterForm e LoginForm
+  views.py        register, login, logout
 utils/
   pagination.py   cálculo do intervalo de páginas
   recipes/        factory de receitas falsas

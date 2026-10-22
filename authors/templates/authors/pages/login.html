@@ -1,0 +1,16 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Entrar{% endblock title %}
+
+{% block content %}
+<div class="main-content container form-page form-page-narrow">
+    <div class="form-intro">
+        <h2 class="form-title">Entrar</h2>
+        <p class="form-subtitle">Acesse sua conta para gerenciar suas receitas.</p>
+    </div>
+
+    {% include 'authors/partials/form.html' with form_grid_class='form-grid-single' button_label='Entrar' %}
+
+    <p class="form-switch">Ainda não tem conta? <a href="{% url 'authors:register' %}">Criar conta</a></p>
+</div>
+{% endblock content %}
