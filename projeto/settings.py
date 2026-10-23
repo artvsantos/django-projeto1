@@ -91,6 +91,9 @@ DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
         conn_max_age=600,
+        # O Postgres gratuito desliga quando fica parado. Sem a checagem,
+        # o Django tentaria reaproveitar uma conexão que já morreu.
+        conn_health_checks=True,
     )
 }
 
@@ -148,6 +151,21 @@ STORAGES = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Na hospedagem, o disco é apagado a cada deploy, então as fotos das
+# receitas vão para o Cloudinary. Só liga quando CLOUDINARY_URL existe:
+# o pacote quebra sem credenciais, e localmente e nos testes as fotos
+# continuam na pasta media/.
+#
+# Os apps entram no fim, depois do staticfiles, de propósito: o pacote
+# traz um collectstatic próprio que quebra no Django 5.2, e o primeiro
+# app da lista é quem ganha. Assim vale o do Django, e o CSS segue com
+# o WhiteNoise.
+if os.environ.get('CLOUDINARY_URL'):
+    INSTALLED_APPS += ['cloudinary_storage', 'cloudinary']
+    STORAGES['default'] = {
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+    }
 
 # Para onde o @login_required manda quem não entrou.
 LOGIN_URL = 'authors:login'

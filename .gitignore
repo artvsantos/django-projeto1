@@ -134,3 +134,6 @@ Claude outputs/
 
 # contexto para o Claude Code (local, nao publicar)
 CLAUDE.md
+
+# guia pessoal de deploy (local, nao publicar)
+DEPLOY.md

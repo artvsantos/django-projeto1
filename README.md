@@ -26,7 +26,7 @@ A paginação não é a do Django pura. Tem uma função em `utils/pagination.py
 
 ## Testes
 
-117 testes, 99% de cobertura.
+121 testes, 99% de cobertura.
 
 Cobrem os models, as URLs, as views, os formulários, as permissões do painel (ninguém mexe na receita de outro autor) e o cálculo da paginação. Models, views e URLs estão em 100%; a paginação fica em 93%, e é onde moram os casos de borda.
 
@@ -44,7 +44,7 @@ coverage html   # relatório navegável em htmlcov/index.html
 
 ## Stack
 
-Python 3.11, Django 5.2, SQLite, pytest, coverage, python-dotenv, Pillow.
+Python 3.11, Django 5.2, SQLite, pytest, coverage, python-dotenv, Pillow. Em produção: Postgres, WhiteNoise, gunicorn e Cloudinary para as fotos.
 
 ## Rodando localmente
 
