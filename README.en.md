@@ -29,7 +29,7 @@ Pagination isn't Django's out of the box. There's a function in `utils/paginatio
 
 ## Tests
 
-127 tests, 99% coverage.
+138 tests, 99% coverage.
 
 They cover the models, the URLs, the views, the forms, the dashboard permissions (nobody can touch another author's recipe) and the pagination range. Models, views and URLs sit at 100%; pagination is at 93%, and that's where the edge cases live.
 
