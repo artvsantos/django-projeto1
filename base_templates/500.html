@@ -1,0 +1,33 @@
+{% load static %}<!DOCTYPE html>
+{% comment %}
+    Não estende o base.html de propósito: o cabeçalho consulta o banco
+    (menu de categorias), e se o erro foi o banco fora do ar, esta página
+    também cairia. O Django renderiza o 500 sem context processors.
+{% endcomment %}
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/global-style.css' %}">
+    <title>Algo deu errado | Receitas</title>
+</head>
+
+<body>
+    <header class="main-header-container">
+        <div class="main-header container">
+            <h1><a class="main-logo" href="/"><span class="main-logo-text">Receitas</span></a></h1>
+        </div>
+    </header>
+
+    <main class="main-content-container">
+        <div class="main-content container error-page">
+            <p class="error-code">500</p>
+            <h2 class="error-title">Algo deu errado</h2>
+            <p class="error-text">
+                Tivemos um problema do nosso lado. Tente de novo em alguns minutos.
+            </p>
+            <a class="button button-dark" href="/">Voltar para o início</a>
+        </div>
+    </main>
+</body>
+</html>

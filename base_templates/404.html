@@ -1,0 +1,17 @@
+{% extends 'global/base.html' %}
+
+{% block title %}Página não encontrada{% endblock title %}
+
+{% block content %}
+<div class="main-content container error-page">
+    <p class="error-code">404</p>
+    <h2 class="error-title">Página não encontrada</h2>
+    <p class="error-text">
+        Essa receita saiu do forno ou o endereço está errado.
+        Use a busca acima ou volte para a lista de receitas.
+    </p>
+    <a class="button button-dark" href="{% url 'recipes:home' %}">
+        <i class="fas fa-utensils"></i> Ver todas as receitas
+    </a>
+</div>
+{% endblock content %}
