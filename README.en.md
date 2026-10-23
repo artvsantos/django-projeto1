@@ -2,6 +2,9 @@
 
 A recipe site built with Django. It's a study project, written test-first.
 
+**Live:** https://receitas-arthur.onrender.com<br>
+<sub>The first visit can take up to a minute: the free server sleeps when idle.</sub>
+
 [![CI](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml/badge.svg)](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml)
 [![Django](https://img.shields.io/badge/django-5.2-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com)
 [![Coverage](https://img.shields.io/badge/coverage-99%25-2EA043?style=flat-square)](#tests)

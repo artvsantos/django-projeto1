@@ -2,6 +2,9 @@
 
 Site de receitas feito em Django. É um projeto de estudo, escrito com TDD: os testes vieram antes do código.
 
+**No ar:** https://receitas-arthur.onrender.com<br>
+<sub>A primeira visita pode levar até um minuto: o servidor gratuito dorme quando fica parado.</sub>
+
 [![CI](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml/badge.svg)](https://github.com/artvsantos/django-projeto1/actions/workflows/ci.yml)
 [![Django](https://img.shields.io/badge/django-5.2-092E20?style=flat-square&logo=django&logoColor=white)](https://www.djangoproject.com)
 [![Cobertura](https://img.shields.io/badge/cobertura-99%25-2EA043?style=flat-square)](#testes)
