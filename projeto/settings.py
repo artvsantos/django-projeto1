@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'recipes',
     'authors',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -169,6 +171,13 @@ if os.environ.get('CLOUDINARY_URL'):
 
 # Para onde o @login_required manda quem não entrou.
 LOGIN_URL = 'authors:login'
+
+# API (/api/v1/). Só leitura por enquanto, aberta a qualquer visitante.
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
 
 # Só na hospedagem, que define PRODUCTION=1. Localmente e nos
 # testes fica desligado, senão o SSL redirect quebra o test client.

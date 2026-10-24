@@ -1,6 +1,7 @@
 Django==5.2.7
 python-dotenv==1.2.2
 Pillow==12.2.0
+djangorestframework==3.18.3
 
 # deploy
 gunicorn==26.2.0

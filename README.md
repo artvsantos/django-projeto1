@@ -24,12 +24,29 @@ Site de receitas feito em Django. É um projeto de estudo, escrito com TDD: os t
 - Cadastro de autor, com validação de senha forte e e-mail único
 - Login e logout, com proteção contra redirecionamento para outro site
 - Painel do autor: cada um envia, edita e apaga as próprias receitas, que só vão ao ar depois de aprovadas no admin
+- API REST de leitura em `/api/v1/` (veja abaixo)
 
 A paginação não é a do Django pura. Tem uma função em `utils/pagination.py` que monta o intervalo de páginas em volta da página atual sem passar do começo nem do fim da lista. É a parte com mais caso de borda do projeto, e também a mais testada.
 
+## API
+
+API REST só de leitura, feita com Django REST Framework, aberta a qualquer visitante. Aberta no navegador, mostra uma página navegável; com `curl` ou de outro programa, responde JSON.
+
+| Endereço | O que devolve |
+| --- | --- |
+| `GET /api/v1/recipes/` | Receitas publicadas, 10 por página. Filtros: `?search=bolo` e `?category=1` |
+| `GET /api/v1/recipes/<id>/` | Uma receita, com o modo de preparo |
+| `GET /api/v1/categories/` | Categorias com receitas publicadas e quantas cada uma tem |
+
+```bash
+curl "https://receitas-arthur.onrender.com/api/v1/recipes/?search=queijo"
+```
+
+Receita não publicada dá 404, os dados privados do autor (e-mail, senha) nunca aparecem, e a lista faz sempre 2 consultas ao banco, não importa quantas receitas tenha na página. Tudo isso tem teste.
+
 ## Testes
 
-138 testes, 99% de cobertura.
+169 testes, 99% de cobertura.
 
 Cobrem os models, as URLs, as views, os formulários, as permissões do painel (ninguém mexe na receita de outro autor) e o cálculo da paginação. Models, views e URLs estão em 100%; a paginação fica em 93%, e é onde moram os casos de borda.
 
@@ -47,7 +64,7 @@ coverage html   # relatório navegável em htmlcov/index.html
 
 ## Stack
 
-Python 3.11, Django 5.2, SQLite, pytest, coverage, python-dotenv, Pillow. Em produção: Postgres, WhiteNoise, gunicorn e Cloudinary para as fotos.
+Python 3.11, Django 5.2, Django REST Framework, SQLite, pytest, coverage, python-dotenv, Pillow. Em produção: Postgres, WhiteNoise, gunicorn e Cloudinary para as fotos.
 
 ## Rodando localmente
 
@@ -85,6 +102,9 @@ recipes/          app principal
 authors/          cadastro, login, logout e painel do autor
   forms.py        RegisterForm, LoginForm e RecipeForm
   views.py        conta e painel (criar, editar, apagar receita)
+api/              API REST (Django REST Framework)
+  serializers.py  o formato do JSON
+  views.py        receitas e categorias, só leitura
 utils/
   pagination.py   cálculo do intervalo de páginas
   recipes/        factory de receitas falsas
