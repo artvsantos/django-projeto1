@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'recipes',
     'authors',
     'api',
@@ -172,11 +173,21 @@ if os.environ.get('CLOUDINARY_URL'):
 # Para onde o @login_required manda quem não entrou.
 LOGIN_URL = 'authors:login'
 
-# API (/api/v1/). Só leitura por enquanto, aberta a qualquer visitante.
+# API (/api/v1/). Ler é aberto; escrever exige token (ou a sessão do
+# site, para usar a página navegável já logado).
 REST_FRAMEWORK = {
+    # Token primeiro: sem login, a resposta é 401 com o cabeçalho
+    # WWW-Authenticate. Com a sessão na frente, viraria 403.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    # Tentativas de pedir token por minuto, por IP. A contagem fica no
+    # cache da memória de cada processo; no Render grátis roda um só.
+    'DEFAULT_THROTTLE_RATES': {'login': '5/minute'},
 }
 
 # Só na hospedagem, que define PRODUCTION=1. Localmente e nos

@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from django.core.files.uploadedfile import UploadedFile
 
+from recipes import validation
 from recipes.models import Recipe
 
 
@@ -114,21 +114,15 @@ class RecipeForm(forms.ModelForm):
     injetar script na página da receita.
     """
 
-    TIME_UNITS = [('minutos', 'minutos'), ('horas', 'horas')]
-    SERVINGS_UNITS = [
-        ('porções', 'porções'),
-        ('fatias', 'fatias'),
-        ('unidades', 'unidades'),
-        ('pessoas', 'pessoas'),
-    ]
-    MAX_COVER_SIZE = 2 * 1024 * 1024
     # O form é em duas colunas; esses ocupam a linha inteira.
     full_width_fields = ('description', 'preparation_steps', 'cover')
 
     preparation_time_unit = forms.ChoiceField(
-        label='Unidade', choices=TIME_UNITS,
+        label='Unidade', choices=validation.TIME_UNITS,
     )
-    servings_unit = forms.ChoiceField(label='Unidade', choices=SERVINGS_UNITS)
+    servings_unit = forms.ChoiceField(
+        label='Unidade', choices=validation.SERVINGS_UNITS,
+    )
 
     class Meta:
         model = Recipe
@@ -170,42 +164,24 @@ class RecipeForm(forms.ModelForm):
         self.fields['category'].required = True
         self.fields['category'].empty_label = 'Escolha uma categoria'
 
+    # As regras moram em recipes/validation.py, divididas com a API.
     def clean_title(self):
-        title = self.cleaned_data['title'].strip()
-        if len(title) < 5:
-            raise ValidationError(
-                'O título precisa ter pelo menos 5 caracteres.',
-            )
-        return title
-
-    def _positive(self, field):
-        value = self.cleaned_data[field]
-        if value <= 0:
-            raise ValidationError('Informe um número maior que zero.')
-        return value
+        return validation.clean_title(self.cleaned_data['title'])
 
     def clean_preparation_time(self):
-        return self._positive('preparation_time')
+        return validation.clean_positive(self.cleaned_data['preparation_time'])
 
     def clean_servings(self):
-        return self._positive('servings')
+        return validation.clean_positive(self.cleaned_data['servings'])
 
     def clean_cover(self):
-        cover = self.cleaned_data.get('cover')
-        # Na edição sem foto nova, cover é o arquivo que já está salvo;
-        # só a foto enviada agora precisa passar pelo limite.
-        is_new_upload = isinstance(cover, UploadedFile)
-        if is_new_upload and cover.size > self.MAX_COVER_SIZE:
-            raise ValidationError('A imagem pode ter no máximo 2 MB.')
-        return cover
+        return validation.clean_cover(self.cleaned_data.get('cover'))
 
     def clean(self):
         cleaned_data = super().clean()
-        title = cleaned_data.get('title', '')
-        description = cleaned_data.get('description', '')
-
-        if title and title.lower() == description.strip().lower():
-            self.add_error(
-                'description', 'A descrição não pode ser igual ao título.',
-            )
+        error = validation.check_description(
+            cleaned_data.get('title', ''), cleaned_data.get('description', ''),
+        )
+        if error:
+            self.add_error('description', error)
         return cleaned_data

@@ -221,6 +221,7 @@ class ApiRootTest(ApiTestBase):
         self.assertEqual(response.data, {
             'recipes': 'http://testserver/api/v1/recipes/',
             'categories': 'http://testserver/api/v1/categories/',
+            'my-recipes': 'http://testserver/api/v1/my-recipes/',
         })
 
     def test_browsable_api_page_opens_in_the_browser(self):
